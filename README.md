@@ -1,6 +1,6 @@
-# my-vue-app
+# sensorplug
 
-> A Vue.js project
+> A Device Sensor Project
 
 ## Build Setup
 
