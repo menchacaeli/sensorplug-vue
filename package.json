@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "bulma": "^0.5.1",
+    "device-sensors": "^1.0.2",
     "jquery": "^3.2.1",
     "materialize-css": "^0.100.1",
     "vue": "^2.3.3",

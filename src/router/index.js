@@ -4,6 +4,8 @@ import Router from 'vue-router'
 import Bulma from 'bulma'
 import 'bulma/css/bulma.css'
 
+import Device from 'device-sensors'
+
 import Home from '@/components/Home'
 import Examples from '@/components/Examples'
 import Accelerometer from '@/components/Accelerometer'
@@ -15,6 +17,7 @@ import GetStarted from '@/components/GetStarted'
 
 Vue.use(Router)
 Vue.use(Bulma)
+Vue.use(Device)
 
 export default new Router({
   routes: [
