@@ -11,7 +11,7 @@ const result = computed(() => JSON.stringify(motion, null, 2))
     <h1>
       Device Orientation:
     </h1>
-    <pre lang="json">{{ result }}</pre>
+    <pre>{{ result }}</pre>
   </div>
 </template>
 
