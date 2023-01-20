@@ -1,96 +1,42 @@
-<template>
-  <div id="app">
-    <!-- Hero header: will stick at the top -->
-    <div class="hero-head">
-      <header class="nav">
-        <div class="container">
-          <div class="nav-left">
-            <a class="nav-item">
-              <img src="./assets/logo-color.png" alt="Logo">
-            </a>
-          </div>
-          <span class="nav-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-          <div class="nav-right nav-menu">
-            <a class="nav-item is-active">
-              <router-link to="/">Home</router-link>
-            </a>
-            <a class="nav-item">
-              <router-link to="/Examples/Accelerometer">Examples</router-link>
-            </a>
-            <a class="nav-item">
-              <router-link to="/Documentation/GetStarted">Documentation</router-link>
-            </a>
-            <span class="nav-item">
-              <a class="button is-success is-inverted">
-                <span class="icon">
-                  <i class="fa fa-github"></i>
-                </span>
-                <span>Download</span>
-              </a>
-            </span>
-          </div>
-        </div>
-      </header>
-    </div>
-    <router-view></router-view>
-    <footer class="footer">
-      <div class="container">
-        <div class="content has-text-centered">
-          <p>
-            <strong>sensorplug.</strong> by <a href="http://www.menchacaeli.com">Eli Menchaca</a>. The source code is licensed
-            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
-          </p>
-          <p>
-            <a class="icon" href="https://github.com/jgthms/bulma">
-              <i class="fa fa-github"></i>
-            </a>
-          </p>
-        </div>
-      </div>
-    </footer>
-  </div>
-</template>
+<script setup lang="ts">
+import { RouterView } from 'vue-router'
+import { ref } from 'vue'
 
-<script>
-export default {
-  name: 'app',
-  data() {
-    return {
-
-    }
-  },
-  // methods: {
-  //   openNav: function (event) {
-  //     document.getElementById("mySidenav").style.width = "250px";
-  //     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-  //   },
-  //   closeNav: function (event) {
-  //     document.getElementById("mySidenav").style.width = "0";
-  //     document.body.style.backgroundColor = "white";
-  //   }
-  // }
-}
+const theme = ref('dark')
+const handleToggleTheme = () => theme.value = theme.value === 'light' ? 'dark' : 'light'
 </script>
 
-<!-- Global Style for App -->
-<style>
-.nav {
-  box-shadow: 0 5px 10px -7px #9e9e9e;
-}
+<template>
+  <v-app :theme="theme">
+    <v-app-bar title="sensor-plug">
+      <v-spacer />
+      <v-btn
+          :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+          @click="handleToggleTheme"
+      >Toggle Theme</v-btn>
+    </v-app-bar>
 
-.title {
-  color: #4e4e4e;
-}
+    <v-navigation-drawer permanent>
+      <v-list>
+        <v-list-item to="/" prepend-icon="mdi-speedometer-medium" title="Get Started"></v-list-item>
+        <v-list-group value="Sensors">
+          <template v-slot:activator="{ props }">
+            <v-list-item
+                v-bind="props"
+                prepend-icon="mdi-devices"
+                title="Sensors"
+            ></v-list-item>
+          </template>
 
-.hero.is-light .title {
-    color: #17b83d;
-}
+          <v-list-item to="/geolocation" title="Geolocation"></v-list-item>
+          <v-list-item to="/motion" title="Motion"></v-list-item>
+          <v-list-item to="/orientation" title="Orientation"></v-list-item>
+        </v-list-group>
+      </v-list>
+    </v-navigation-drawer>
 
-.footer {
-  box-shadow: 0 5px 10px -7px #9e9e9e inset;
-}
-</style>
+    <v-main>
+      <RouterView />
+    </v-main>
+  </v-app>
+</template>
